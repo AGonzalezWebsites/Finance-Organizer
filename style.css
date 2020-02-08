@@ -1,9 +1,35 @@
+/* Fonts we can use 
+font-family: 'Playfair Display', serif;
+font-family: 'Raleway', sans-serif;
+*/
+html {
+    --banner-font: 'Playfair Display', serif;
+    --header-font: 'Raleway', sans-serif;
+}
+
 html {
     transition: 3s smooth;
     scroll-behavior: smooth;
 }
 
-.bg-info#budgetContainer.h1 {
-    color: beige !important;
-    font-size: 50px;
+
+#header-title {
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: var(--banner-font);
+    border: 1px inset black;
+}
+
+#budgetContainer>h1 {
+    font-family: var(--header-font);
+}
+
+#submitActivityContainer>h1 {
+    font-family: var(--header-font);
+}
+
+#ActivityContainer>h1 {
+    font-family: var(--header-font);
 }

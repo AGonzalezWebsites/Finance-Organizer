@@ -12,7 +12,11 @@ submitBudget.addEventListener('click', setBudget)
 // Form Submit Event
 form.addEventListener('submit', addItem);
 // Delete event
-itemList.addEventListener('click', removeItem);
+itemList.addEventListener('click', removeItem)
+// change status event
+itemList.addEventListener('click', changeStatus)
+// change status event
+itemList.addEventListener('click', changeOrder)
 // Filter Event
 filter.addEventListener('click', filterItems);
 //Arrange items event
@@ -22,6 +26,8 @@ filter.addEventListener('click', filterItems);
 function setBudget(e) {
     e.preventDefault();
     budgetAmount = document.getElementById('budget').value;
+    budgetAmount = budgetAmount.replace(/,/g, "").replace(/\$/g, '');
+    
     budgetElement = document.createElement('h1')
     budgetElement.className = 'badge badge-light text-wrap p-4';
     budgetElement.innerHTML = 'Budget:<br><br>$'+budgetAmount;
@@ -41,15 +47,11 @@ function calculateExpenses(){
     var items = itemList.getElementsByTagName('li');
     var expensesTotalAmount = 0;
 
-    console.log(1)
     // Convert to an array
     Array.from(items); 
     
     for(i=0; i < items.length; i++){
         expensesTotalAmount += items[i].value;
-        console.log(items);
-        console.log(items[i].value);
-        console.log(expensesTotalAmount);
     }
 
     if (expensesTotalAmount > budgetAmount){
@@ -83,21 +85,20 @@ function addItem(e){
         selectedBtnColor = 'btn-danger';
         console.log("High");
     }
-
+    priorityButton = '<span type=\"button\" class=\"badge text-wrap p-2 mr-2 float-left status ' +selectedBtnColor+ '\">'+prioritySelected+'</span> '+newPayment;
     // Add priority + text node with input value
-    li.innerHTML = '<span type=\"button\" class=\"badge text-wrap p-2 mr-2 float-left ' +selectedBtnColor+ '\">'+prioritySelected+'</span> '+newPayment;
+    li.innerHTML = priorityButton;
     
     //create del button element
-    var deleteBtn = document.createElement('button');
+    var deleteBtn = document.createElement('i');
     // Add classes to delete button
-    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
-    // Append text node
-    deleteBtn.appendChild(document.createTextNode('X'));
+    deleteBtn.className = 'far fa-trash-alt btn btn-danger btn-sm float-right delete';
     //Append button to li
     li.appendChild(deleteBtn);
 
     //get Amount value
     var newAmount = document.getElementById('amount').value;
+    newAmount = newAmount.replace(/,/g, "").replace(/\$/g, '');
     // create div to be inserted
     newAmountInsert = document.createElement('div');
     //add amount value to div
@@ -110,7 +111,7 @@ function addItem(e){
     li.appendChild(newAmountInsert);
     //add amount value to li
     li.value = newAmount;
-
+    li.style.border = '1px inset silver';
     //Append li to list
     itemList.appendChild(li);
     //delete inner contents of activity adder
@@ -122,8 +123,25 @@ function addItem(e){
     calculateExpenses();
 }
 
-// Rearrange Order
+// change status
+function changeStatus(e){
+    if (e.target.classList.contains('status')){
+        if(e.target.classList.contains('btn-success')){
+            e.target.classList.remove('btn-success')
+            e.target.classList = e.target.classList+' btn-warning';
+            e.target.innerHTML = "Pending";
+        } else if(e.target.classList.contains('btn-warning')){
+            e.target.classList.remove('btn-warning')
+            e.target.classList = e.target.classList+' btn-danger';
+            e.target.innerHTML = "Unpaid";
+        } else {
+            e.target.classList.remove('btn-danger')
+            e.target.classList = e.target.classList+' btn-success';
+            e.target.innerHTML = "Paid";
+        }
 
+    }
+}
 // remove item
 function removeItem(e){
     if (e.target.classList.contains('delete')){
@@ -134,6 +152,16 @@ function removeItem(e){
 
     }
     calculateExpenses();
+}
+
+// change list order
+function changeOrder(e){
+    if (e.target.classList.contains('list-group-item')){
+        var selectedItem = e.target;
+        console.log(selectedItem);
+        selectedItem.style.border = '2px dotted yellow';
+        setTimeout(function(){selectedItem.style.border = '1px inset silver';}, 4000);
+    }
 }
 
 // Filter Items based off importance
