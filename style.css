@@ -2,3 +2,8 @@ html {
     transition: 3s smooth;
     scroll-behavior: smooth;
 }
+
+.bg-info#budgetContainer.h1 {
+    color: beige !important;
+    font-size: 50px;
+}

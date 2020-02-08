@@ -1,10 +1,10 @@
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var priority = document.getElementById('priority');
-//priority[0,1,2].innerText
 var filter = document.getElementById('filter');
-var arrange = document.getElementById('arrange');
 var budget = document.getElementById('addBudget');
+var budgetContainer = document.getElementById('budgetContainer');
+var expensesTotal = document.getElementById('expensesTotal');
 
 
 //Set Budget event
@@ -16,28 +16,58 @@ itemList.addEventListener('click', removeItem);
 // Filter Event
 filter.addEventListener('click', filterItems);
 //Arrange items event
-arrange.addEventListener('change', arrangeItems)
+//arrange.addEventListener('change', arrangeItems)
 
 // Set Budget
 function setBudget(e) {
     e.preventDefault();
     budgetAmount = document.getElementById('budget').value;
-    budgetElement = document.createElement('div')
-    budgetElement.className = 'badge badge-primary text-wrap p-3'
-    budgetElement.innerHTML = 'Budget: $'+budgetAmount;
-    addBudget.appendChild(budgetElement)
-    console.log(budgetAmount)
-    console.log(budgetElement)
+    budgetElement = document.createElement('h1')
+    budgetElement.className = 'badge badge-light text-wrap p-4';
+    budgetElement.innerHTML = 'Budget:<br><br>$'+budgetAmount;
+    budgetElement.setAttribute('id', 'BudgetTotal')
+    budgetContainer.appendChild(budgetElement)
     submitBudget.style.display = "none";
-    document.getElementById('budget').style.display = 'none';
+    document.getElementById('addBudget').style.display = 'none';
+    console.log(budgetContainer)
+    expensesTotal.style.display = 'inline-block';
+    document.getElementById('submitActivityContainer').style.display = 'block';
+    calculateExpenses();
+}
+
+// Set total expenses
+function calculateExpenses(){
+    // Get lis
+    var items = itemList.getElementsByTagName('li');
+    var expensesTotalAmount = 0;
+
+    console.log(1)
+    // Convert to an array
+    Array.from(items); 
+    
+    for(i=0; i < items.length; i++){
+        expensesTotalAmount += items[i].value;
+        console.log(items);
+        console.log(items[i].value);
+        console.log(expensesTotalAmount);
+    }
+
+    if (expensesTotalAmount > budgetAmount){
+    expensesTotal.style.background = 'red'
+    } else {
+    expensesTotal.style.background = 'white'
+    }
+    expensesTotal.innerHTML = 'Expenses:<br><br>$'+expensesTotalAmount;
 }
 
 // Add item
 function addItem(e){
     e.preventDefault();
+
     // Get input value
-    var newItem = document.getElementById('item').value;
-    // Create new li element
+    var newPayment = document.getElementById('item').value;
+
+    // Create li for new item
     var li = document.createElement('li');
     // Add Class
     li.className = 'list-group-item';
@@ -53,10 +83,10 @@ function addItem(e){
         selectedBtnColor = 'btn-danger';
         console.log("High");
     }
+
     // Add priority + text node with input value
-    li.innerHTML = '<button type=\"button\" class=\"btn btn-sm mr-2 ' +selectedBtnColor+ '\">'+prioritySelected+'</button> '+newItem;
+    li.innerHTML = '<span type=\"button\" class=\"badge text-wrap p-2 mr-2 float-left ' +selectedBtnColor+ '\">'+prioritySelected+'</span> '+newPayment;
     
-    //BUTTONS BELOW
     //create del button element
     var deleteBtn = document.createElement('button');
     // Add classes to delete button
@@ -66,49 +96,33 @@ function addItem(e){
     //Append button to li
     li.appendChild(deleteBtn);
 
-    //create global arrange button element
-    arrangeBtn = document.createElement('button');
-    // Add classes to arrange button
-    arrangeBtn.className = 'btn btn-secondary btn-sm float-left mr-2';
-    // Append text node
-    arrangeBtn.innerHTML = "<i class=\"fas fa-arrows-alt\" style=\"font-size:15px;color:white;\"></i>"
-    //Append button to li
-    li.appendChild(arrangeBtn);
-    //display none since rearrange needs to be activated
-    arrangeBtn.style.display = 'none';
+    //get Amount value
+    var newAmount = document.getElementById('amount').value;
+    // create div to be inserted
+    newAmountInsert = document.createElement('div');
+    //add amount value to div
+    newAmountInsert.innerHTML = '$'+newAmount;
+    // Add class to amount item
+    newAmountInsert.className = 'badge badge-info text-wrap p-2 mr-2 float-left';
+    // Add ID to amount item
+    newAmountInsert.setAttribute("id", "itemAmount");
+    //Append amount to li
+    li.appendChild(newAmountInsert);
+    //add amount value to li
+    li.value = newAmount;
+
     //Append li to list
     itemList.appendChild(li);
     //delete inner contents of activity adder
     document.getElementById('item').value = "";
     document.getElementById('item').placeholder = "Next payment For?";
+
+    // Display Block for container - meant for first input
+    document.getElementById('ActivityContainer').style.display = 'block';
+    calculateExpenses();
 }
 
 // Rearrange Order
-
-//create arrange button element
-var i = 0;
-//toggle button
-function arrangeItems(){
-    i++;
-    var items = itemList.getElementsByTagName('li');
-    var arrayedItems = Array.from(items);
-    console.log(arrayedItems);
-    if (i%2 == 0) {
-        for(var a=0; a < arrayedItems.length; a++){
-            arrayedItems[a].childNodes[3].style.display = 'none';
-            console.log(arrayedItems[a])
-        }
-    } else {
-        //arrangeBtn.style.display = 'block';
-        for(var a=0; a < arrayedItems.length; a++){
-            arrayedItems[a].childNodes[3].style.display = 'block';
-            console.log(arrayedItems[a])
-        }
-    }
-
-    
-
-}
 
 // remove item
 function removeItem(e){
@@ -119,6 +133,7 @@ function removeItem(e){
         }
 
     }
+    calculateExpenses();
 }
 
 // Filter Items based off importance
