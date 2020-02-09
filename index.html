@@ -27,19 +27,20 @@
   <div class="container">
    <div id="main">
 
-    <div class="bg-info border border-dark rounded p-2 pt-3 pl-3 mb-3" id="budgetContainer">
-      <h1 class="badge badge-light text-wrap p-4" id="expensesTotal" style="display: none;">Expenses: </h1>
+    <div class="d-flex justify-content-center bg-info border border-dark rounded p-2 pt-3 pl-3 mb-3" id="budgetContainer">
+      <h1 class="badge badge-light text-wrap order-2" id="expensesTotal" style="display: none;">Expenses: </h1>
+      <h1 class="badge badge-success text-wrap order-3" id="budgetDifference" style="display: none;">Left Over: </h1>
       <form id="addBudget" class="form-inline mb-3">
-        <input type="text" maxlength="10" class="form-control mr-2 mt-2 w-30 p-2" id="budget" value="" placeholder="Budget Amount?">
+        <input type="text" maxlength="9" class="form-control mr-2 mt-2 w-30 p-2" id="budget" value="" placeholder="Budget Amount?">
         <input type="submit" class="btn btn-success mt-2 border" id="submitBudget" value="Set Budget">
       </form>
       </div>
 
      <div class="bg-info border border-dark rounded p-3 mb-3" id="submitActivityContainer" style="display: none;">
-      <h1 class="title text-light">Submit Expense <i style="font-size: 15px;">and Status</i></h1>
-      <form id="addForm" class="form-inline mb-3">
-          <input type="text" maxlength="38" class="form-control mr-2 mt-2 w-60 p-2" id="item" value="" placeholder="Payment For?">
-          <input type="text" maxlength="10" class="form-control mr-2 mt-2 w-30 p-2" id="amount" value="" placeholder="Amount?">
+      <h1 class="title text-light pr-2 text-center">Submit Expense</h1>
+      <form id="addForm" class="d-flex justify-content-center form-inline mb-3">
+          <input type="text" maxlength="30" class="form-control mr-2 mt-2 w-60 p-2" id="item" value="" placeholder="Payment For?">
+          <input type="text" maxlength="9" class="form-control mr-2 mt-2 w-30 p-2" id="amount" value="" placeholder="Amount?">
         <select class="form-control mr-2 mt-2" style="width:105px;" id="priority">
           <option value="1">Paid</option>
           <option value="2">Pending</option>
@@ -50,8 +51,8 @@
       </div>
 
       <div class="bg-info border border-dark rounded p-3 mb-3" id="ActivityContainer" style="display: none;">
-        <h1 class="title text-light w-50">Activities</h1>
-        <select class="form-control mr-2 mb-2 mt-2 w-50" id="filter">
+        <h1 class="title text-light text-center">Activities</h1>
+        <select class="d-flex justify-content-center form-control mr-2 mb-2 mt-2" id="filter">
           <option value="All">All</option>
           <option value="Paid">Paid</option>
           <option value="Pending">Pending</option>

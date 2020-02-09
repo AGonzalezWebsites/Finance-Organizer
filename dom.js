@@ -5,6 +5,7 @@ var filter = document.getElementById('filter');
 var budget = document.getElementById('addBudget');
 var budgetContainer = document.getElementById('budgetContainer');
 var expensesTotal = document.getElementById('expensesTotal');
+var leftOver = document.getElementById('budgetDifference');
 
 
 //Set Budget event
@@ -29,23 +30,24 @@ function setBudget(e) {
     budgetAmount = budgetAmount.replace(/,/g, "").replace(/\$/g, '');
     
     budgetElement = document.createElement('h1')
-    budgetElement.className = 'badge badge-light text-wrap p-4';
+    budgetElement.className = 'order-1 badge badge-light text-wrap';
     budgetElement.innerHTML = 'Budget:<br><br>$'+budgetAmount;
     budgetElement.setAttribute('id', 'BudgetTotal')
     budgetContainer.appendChild(budgetElement)
     submitBudget.style.display = "none";
     document.getElementById('addBudget').style.display = 'none';
-    console.log(budgetContainer)
     expensesTotal.style.display = 'inline-block';
     document.getElementById('submitActivityContainer').style.display = 'block';
+    document.getElementById('budgetDifference').style.display = 'inline-block';
     calculateExpenses();
 }
 
 // Set total expenses
+var expensesTotalAmount;
 function calculateExpenses(){
     // Get lis
     var items = itemList.getElementsByTagName('li');
-    var expensesTotalAmount = 0;
+    expensesTotalAmount = 0;
 
     // Convert to an array
     Array.from(items); 
@@ -55,11 +57,20 @@ function calculateExpenses(){
     }
 
     if (expensesTotalAmount > budgetAmount){
-    expensesTotal.style.background = 'red'
+    expensesTotal.style.background = 'red';
     } else {
-    expensesTotal.style.background = 'white'
+    expensesTotal.style.background = 'white';
     }
     expensesTotal.innerHTML = 'Expenses:<br><br>$'+expensesTotalAmount;
+    calculateDifference();
+}
+
+// Set total expenses
+var leftOverAmount = 0;
+function calculateDifference(){   
+    leftOverAmount = budgetAmount - expensesTotalAmount;
+    leftOver.innerHTML = 'Left Over:<br><br>$'+leftOverAmount;
+
 }
 
 // Add item
@@ -127,15 +138,15 @@ function addItem(e){
 function changeStatus(e){
     if (e.target.classList.contains('status')){
         if(e.target.classList.contains('btn-success')){
-            e.target.classList.remove('btn-success')
+            e.target.classList.remove('btn-success');
             e.target.classList = e.target.classList+' btn-warning';
             e.target.innerHTML = "Pending";
         } else if(e.target.classList.contains('btn-warning')){
-            e.target.classList.remove('btn-warning')
+            e.target.classList.remove('btn-warning');
             e.target.classList = e.target.classList+' btn-danger';
             e.target.innerHTML = "Unpaid";
         } else {
-            e.target.classList.remove('btn-danger')
+            e.target.classList.remove('btn-danger');
             e.target.classList = e.target.classList+' btn-success';
             e.target.innerHTML = "Paid";
         }
