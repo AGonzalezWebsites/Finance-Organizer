@@ -1,3 +1,5 @@
+//if expense bar = 0 and budget = max = min and max width
+
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var priority = document.getElementById('priority');
@@ -72,12 +74,8 @@ function budgetBar(){
 var percentageLeftOver;
 var percentageUsed;
 function leftOverPercentage () {
-    console.log('expensesTotalAmount '+expensesTotalAmount);
-    console.log('budgetAmount '+budgetAmount);
     percentageUsed = (expensesTotalAmount * 100) / budgetAmount;
     percentageLeftOver = (percentageUsed - 100) * -1;
-    console.log(percentageUsed);
-    console.log(percentageLeftOver);
 
     //Apply to left over bar
     for (let i=100; i>percentageLeftOver; i--) {
@@ -86,13 +84,10 @@ function leftOverPercentage () {
     }  
 
     //Apply to expenses bar
-
     for (let e=0; e<percentageUsed; e++) {
         var expenseBar = document.getElementById('expenseBar');
         expenseBar.style.width = e+'%';
-        if(e>100) {
-            expenseBar.style.width = 100+'%';
-        }
+
     }  
 
 }
@@ -115,15 +110,13 @@ function addItem(e){
     if(priority.value - 1 === 0){
         selectedBtnColor = 'btn-success';
     } else if(priority.value - 1 === 1) {
-        console.log("Med");
         selectedBtnColor = 'btn-warning';
     } else {
         selectedBtnColor = 'btn-danger';
-        console.log("High");
     }
     priorityButton = '<span type=\"button\" class=\"badge text-wrap p-2 mr-2 float-left status ' +selectedBtnColor+ '\">'+prioritySelected+'</span> '+newPayment;
     // Add priority + text node with input value
-    li.innerHTML = priorityButton;
+    li.innerHTML = li.innerHTML+priorityButton;
     
     //create del button element
     var deleteBtn = document.createElement('i');
@@ -148,6 +141,10 @@ function addItem(e){
     //add amount value to li
     li.value = newAmount;
     li.style.border = '1px inset silver';
+    li.draggable = "true";
+    li.ondragover = "dragOver(event)";
+    li.ondragstart = "dragStart(event)";
+    console.log(li.ondragover)
     //Append li to list
     itemList.appendChild(li);
     //delete inner contents of activity adder
@@ -194,7 +191,6 @@ function removeItem(e){
 function changeOrder(e){
     if (e.target.classList.contains('list-group-item')){
         var selectedItem = e.target;
-        console.log(selectedItem);
         selectedItem.style.border = '2px dotted yellow';
         setTimeout(function(){selectedItem.style.border = '1px inset silver';}, 4000);
     }
@@ -207,7 +203,6 @@ function filterItems(e){
     // Get lis
     var items = itemList.getElementsByTagName('li');
     // Convert to an array
-    console.log(e);
     Array.from(items).forEach(function(item){
         var itemName = item.firstChild.textContent;
         if(e.target.value == "All") {
@@ -220,6 +215,33 @@ function filterItems(e){
             console.log(itemName.toLowerCase().indexOf(text));
         }
     });
+}
+
+// Arrange Items
+
+var _el;
+function dragOver(e) {
+    console.log('dragOver Beg '+e.target);
+  if (isBefore(_el, e.target))
+    e.target.parentNode.insertBefore(_el, e.target);
+  else
+    e.target.parentNode.insertBefore(_el, e.target.nextSibling);
+}
+
+function dragStart(e) {
+    console.log('dragStart Beg '+e.target);
+  e.dataTransfer.effectAllowed = "move";
+  e.dataTransfer.setData("text/plain", null); // Thanks to bqlou for their comment.
+  _el = e.target;
+}
+
+function isBefore(el1, el2) {
+    console.log('isBefore Beg '+e.target);
+  if (el2.parentNode === el1.parentNode)
+    for (var cur = el1.previousSibling; cur && cur.nodeType !== 9; cur = cur.previousSibling)
+      if (cur === el2)
+        return true;
+  return false;
 }
 
 
