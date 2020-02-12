@@ -20,19 +20,16 @@ itemList.addEventListener('click', changeStatus)
 itemList.addEventListener('click', changeOrder)
 // Filter Event
 filter.addEventListener('click', filterItems);
-//Arrange items event
-//arrange.addEventListener('change', arrangeItems)
 
 // Set Budget
 function setBudget(e) {
     e.preventDefault();
     budgetAmount = document.getElementById('budget').value;
     budgetAmount = budgetAmount.replace(/,/g, "").replace(/\$/g, '');
-    
     budgetElement = document.createElement('h1')
     budgetElement.className = 'order-1 badge badge-light text-wrap';
-    budgetElement.innerHTML = 'Budget:<br><br>$'+budgetAmount;
-    budgetElement.setAttribute('id', 'BudgetTotal')
+    budgetElement.innerHTML = 'Budget:<br>$'+budgetAmount;
+    budgetElement.setAttribute('id', 'budgetTotal')
     budgetContainer.appendChild(budgetElement)
     submitBudget.style.display = "none";
     document.getElementById('addBudget').style.display = 'none';
@@ -41,6 +38,7 @@ function setBudget(e) {
     document.getElementById('budgetDifference').style.display = 'inline-block';
     calculateExpenses();
 }
+
 
 // Set total expenses
 var expensesTotalAmount;
@@ -55,23 +53,50 @@ function calculateExpenses(){
     for(i=0; i < items.length; i++){
         expensesTotalAmount += items[i].value;
     }
-
-    if (expensesTotalAmount > budgetAmount){
-    expensesTotal.style.background = 'red';
-    } else {
-    expensesTotal.style.background = 'white';
-    }
-    expensesTotal.innerHTML = 'Expenses:<br><br>$'+expensesTotalAmount;
-    calculateDifference();
+    expensesTotal.children[0].innerHTML = 'Expenses:<br>$'+expensesTotalAmount;
+    budgetBar();
 }
 
 // Set total expenses
 var leftOverAmount = 0;
-function calculateDifference(){   
+var budgetBar;
+function budgetBar(){   
+    //document.getElementById('budgetTotal');
+    
     leftOverAmount = budgetAmount - expensesTotalAmount;
-    leftOver.innerHTML = 'Left Over:<br><br>$'+leftOverAmount;
+    leftOver.children[0].innerHTML = 'Left Over:<br>$'+leftOverAmount;
+    leftOverPercentage();
+}
+
+// find left over percentage
+var percentageLeftOver;
+var percentageUsed;
+function leftOverPercentage () {
+    console.log('expensesTotalAmount '+expensesTotalAmount);
+    console.log('budgetAmount '+budgetAmount);
+    percentageUsed = (expensesTotalAmount * 100) / budgetAmount;
+    percentageLeftOver = (percentageUsed - 100) * -1;
+    console.log(percentageUsed);
+    console.log(percentageLeftOver);
+
+    //Apply to left over bar
+    for (let i=100; i>percentageLeftOver; i--) {
+                var budgetBar = document.getElementById('budgetBar');
+                budgetBar.style.width = i+'%';
+    }  
+
+    //Apply to expenses bar
+
+    for (let e=0; e<percentageUsed; e++) {
+        var expenseBar = document.getElementById('expenseBar');
+        expenseBar.style.width = e+'%';
+        if(e>100) {
+            expenseBar.style.width = 100+'%';
+        }
+    }  
 
 }
+
 
 // Add item
 function addItem(e){
