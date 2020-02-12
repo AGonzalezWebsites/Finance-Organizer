@@ -1,5 +1,3 @@
-//if expense bar = 0 and budget = max = min and max width
-
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var priority = document.getElementById('priority');
@@ -87,6 +85,10 @@ function leftOverPercentage () {
     for (let e=0; e<percentageUsed; e++) {
         var expenseBar = document.getElementById('expenseBar');
         expenseBar.style.width = e+'%';
+        
+        if(e>100) {
+            expenseBar.style.width = 100+'%';
+        }
 
     }  
 
@@ -144,6 +146,8 @@ function addItem(e){
     li.draggable = "true";
     li.ondragover = "dragOver(event)";
     li.ondragstart = "dragStart(event)";
+
+    document.getElementById('amount').value = "";
     console.log(li.ondragover)
     //Append li to list
     itemList.appendChild(li);
