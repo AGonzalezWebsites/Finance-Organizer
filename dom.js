@@ -135,7 +135,7 @@ function addItem(e){
     //add amount value to div
     newAmountInsert.innerHTML = '$'+newAmount;
     // Add class to amount item
-    newAmountInsert.className = 'badge badge-info text-wrap p-2 mr-2 float-left';
+    newAmountInsert.className = 'badge text-wrap p-2 mr-2 float-left';
     // Add ID to amount item
     newAmountInsert.setAttribute("id", "itemAmount");
     //Append amount to li

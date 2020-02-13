@@ -5,11 +5,18 @@ font-family: 'Raleway', sans-serif;
 html {
     --banner-font: 'Playfair Display', serif;
     --header-font: 'Raleway', sans-serif;
+    /* --base-color: rgba(68, 56, 59, 0.486); */
+    --base-color: rgba(47, 89, 109, 0.596);
+    --sub-color: rgba(146, 134, 121, 0.486);
 }
 
 html {
     transition: 3s smooth;
     scroll-behavior: smooth;
+}
+
+body {
+    background: rgb(34, 34, 34) !important;
 }
 
 body h1{
@@ -31,18 +38,23 @@ i:hover {
     cursor: grab;
 }
 
+#main-header {
+    background: var(--base-color);
+}
+
 #header-title {
-    background: rgb(245, 245, 245);
+    background: var(--sub-color);
     color: black;
     padding: 10px;
     border-radius: 5px;
     font-family: var(--banner-font);
-    border: 1px inset silver;
+    border: 1px inset var(--sub-color);
     box-shadow: rgba(49, 49, 49, 0.445) 0px 2px 10px 5px;
 }
 
 #budgetContainer {
     padding: 20px 15px !important;
+    background: var(--base-color);
 }
 
 #budgetContainer>h1 {
@@ -69,7 +81,7 @@ i:hover {
 
 #expenseBar {
     position: absolute;
-    background: rgb(255, 50, 50) !important;
+    background: rgba(167, 33, 33, 0.884) !important;
     bottom: 0;
     left: 0;
     height: 100%;
@@ -104,10 +116,15 @@ i:hover {
     opacity: .8;
 }
 
+#submitActivityContainer {
+    background: var(--base-color);
+}
+
 #submitActivityContainer>h1 {
+    background: var(--sub-color) !important;
     font-family: var(--header-font);
     color: black !important;
-    border: 1px inset silver;
+    border: 1px inset var(--sub-color);
     border-radius: 5px;
     box-shadow: rgba(49, 49, 49, 0.445) 0px 2px 10px 5px;
     background: rgb(245, 245, 245);
@@ -116,10 +133,15 @@ i:hover {
     font-size: 30px;
 }
 
+#ActivityContainer {
+    background: var(--base-color);
+}
+
 #ActivityContainer>h1 {
+    background: var(--sub-color) !important;
     font-family: var(--header-font);
     color: black !important;
-    border: 1px inset silver;
+    border: 1px inset var(--sub-color);
     border-radius: 5px;
     box-shadow: rgba(49, 49, 49, 0.445) 0px 2px 10px 5px;
     background: rgb(245, 245, 245);
@@ -127,9 +149,6 @@ i:hover {
     margin: 20px 0px 30px 0;
     font-size: 30px;
 }
-
-
-
 
 @media only screen and (min-width: 1200px) {
     .container-fluid {
