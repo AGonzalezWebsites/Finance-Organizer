@@ -7,7 +7,7 @@ html {
     --header-font: 'Raleway', sans-serif;
     /* --base-color: rgba(68, 56, 59, 0.486); */
     --base-color: rgba(47, 89, 109, 0.596);
-    --sub-color: rgba(175, 172, 135, 0.925);
+    --sub-color: rgba(221, 217, 156, 0.925);
 }
 
 html {
@@ -55,21 +55,18 @@ i:hover {
 .fa-minus-square, .fa-plus-square {
     display: inline;
     position: absolute;
+    color: rgb(177, 177, 177);
+    font-size: 0px;
     top: 0;
     right: 0;
     margin: 5px;
-    font-size: 30px;
-}
-
-.fa-plus-square {
-    display: none !important;
 }
 
 #budgetContainer {
     position: relative;
     padding: 40px 15px !important;
     background: var(--base-color);
-    transition: 2s !important;
+    transition: 1s !important;
 }
 
 #budgetContainer>h1 {
@@ -169,7 +166,10 @@ i:hover {
     font-size: 30px;
 }
 
-
+#itemAmount { 
+    color: black;
+    background: silver;
+}
 
 
 

@@ -1,3 +1,7 @@
+//To do List:
+//Local Storage functionality - started at bottom of page
+// Add drag and drop arrangements for list - started on line 151
+
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var priority = document.getElementById('priority');
@@ -6,8 +10,8 @@ var budget = document.getElementById('addBudget');
 var budgetContainer = document.getElementById('budgetContainer');
 var expensesTotal = document.getElementById('expensesTotal');
 var leftOver = document.getElementById('budgetDifference');
-var minimizeToggle = document.getElementById('minimizeToggle1');
-var minimizeToggle2 = document.getElementById('minimizeToggle2');
+var minimizeToggle = document.getElementById('minimizeToggle1A');
+var minimizeToggle2 = document.getElementById('minimizeToggle1B');
 
 
 
@@ -27,21 +31,25 @@ filter.addEventListener('click', filterItems);
 minimizeToggle.addEventListener('click', minimizeToggleItems);
 minimizeToggle2.addEventListener('click', minimizeToggleItems);
 
+
 // Set Budget
 function setBudget(e) {
     e.preventDefault();
     budgetAmount = document.getElementById('budget').value;
     budgetAmount = budgetAmount.replace(/,/g, "").replace(/\$/g, '');
+    localStorage.setItem('budget', budgetAmount);
     budgetElement = document.createElement('h1')
     budgetElement.className = 'order-1 badge badge-light text-wrap';
     budgetElement.innerHTML = 'Budget:<br>$'+budgetAmount;
     budgetElement.setAttribute('id', 'budgetTotal')
+    budgetContainer.style.height = '300px';
     budgetContainer.appendChild(budgetElement)
     submitBudget.style.display = "none";
     document.getElementById('addBudget').style.display = 'none';
     expensesTotal.style.display = 'inline-block';
     document.getElementById('submitActivityContainer').style.display = 'block';
     document.getElementById('budgetDifference').style.display = 'inline-block';
+    document.querySelector('.fa-minus-square').style.fontSize = '25px';
     calculateExpenses();
 }
 
@@ -69,7 +77,7 @@ function budgetBar(){
     //document.getElementById('budgetTotal');
     
     leftOverAmount = budgetAmount - expensesTotalAmount;
-    leftOver.children[0].innerHTML = 'Left Over:<br>$'+leftOverAmount;
+    leftOver.children[0].innerHTML = 'Balance:<br>$'+leftOverAmount;
     leftOverPercentage();
 }
 
@@ -153,7 +161,6 @@ function addItem(e){
     li.ondragstart = "dragStart(event)";
 
     document.getElementById('amount').value = "";
-    console.log(li.ondragover)
     //Append li to list
     itemList.appendChild(li);
     //delete inner contents of activity adder
@@ -252,24 +259,80 @@ function isBefore(el1, el2) {
         return true;
   return false;
 }
-
+var b = 0
 function minimizeToggleItems(e){
+    
+    if (b == 0) {
     console.log(e.target)
     console.log(e.target.parentNode)
-    e.target.parentNode.style.height = '100px';
-    e.target.parentNode.style.height = '50px';
+    var button = document.querySelector('.fa-minus-square');
+    var buttonMax = document.querySelector('.fa-plus-square');
+    
+    e.target.parentNode.style.height = '130px';
+    setTimeout(function(){
+    button.style.fontSize = '0px';
+    buttonMax.style.fontSize = '25px';
+    leftOver.style.display = 'none';
+    expensesTotal.style.display = 'none';
+    leftOver.style.display = 'none';
+    }, 300)
+    b++
+} else if (b == 1) {
+    var button = document.querySelector('.fa-plus-square');
+    var buttonMax = document.querySelector('.fa-minus-square');
+    e.target.parentNode.style.height = '300px';
+    setTimeout(function(){
+        button.style.fontSize = '0px';
+        buttonMax.style.fontSize = '25px';
+        leftOver.style.display = 'inline-block';
+        expensesTotal.style.display = 'inline-block';
+        leftOver.style.display = 'inline-block';
+    }, 300)
+    b--
+    }
     //e.target.parentNode.style.display = 'block';
-
-    
-    
 }
 
 
 
 
+//LOCAL STORAGE FUNCTIONALITY
+
+//bypassing initial page if there was a budget stored
+(function (){
+
+    if (localStorage.getItem('budget') > -1) {
+        console.log('there was data here');
+
+    } else {
+        
+    }
+
+})()
+
+function loadPreviousSession(){
+
+        console.log('there was data here');
+        budgetAmount = localStorage.getItem('budget');
+        budgetAmount = budgetAmount.replace(/,/g, "").replace(/\$/g, '');
+        localStorage.setItem('budget', budgetAmount);
+        budgetElement = document.createElement('h1')
+        budgetElement.className = 'order-1 badge badge-light text-wrap';
+        budgetElement.innerHTML = 'Budget:<br>$'+budgetAmount;
+        budgetElement.setAttribute('id', 'budgetTotal')
+        budgetContainer.style.height = '300px';
+        budgetContainer.appendChild(budgetElement)
+        submitBudget.style.display = "none";
+        document.getElementById('addBudget').style.display = 'none';
+        expensesTotal.style.display = 'inline-block';
+        document.getElementById('submitActivityContainer').style.display = 'block';
+        document.getElementById('budgetDifference').style.display = 'inline-block';
+        document.querySelector('.fa-minus-square').style.fontSize = '25px';
+        calculateExpenses();
 
 
 
+}
 
 
 
