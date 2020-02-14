@@ -256,7 +256,8 @@ function isBefore(el1, el2) {
 function minimizeToggleItems(e){
     console.log(e.target)
     console.log(e.target.parentNode)
-    e.target.parentNode.style.height = '20px';
+    e.target.parentNode.style.height = '100px';
+    e.target.parentNode.style.height = '50px';
     //e.target.parentNode.style.display = 'block';
 
     
