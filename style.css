@@ -7,7 +7,7 @@ html {
     --header-font: 'Raleway', sans-serif;
     /* --base-color: rgba(68, 56, 59, 0.486); */
     --base-color: rgba(47, 89, 109, 0.596);
-    --sub-color: rgba(146, 134, 121, 0.486);
+    --sub-color: rgba(175, 172, 135, 0.925);
 }
 
 html {
@@ -52,9 +52,24 @@ i:hover {
     box-shadow: rgba(49, 49, 49, 0.445) 0px 2px 10px 5px;
 }
 
+.fa-minus-square, .fa-plus-square {
+    display: inline;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    font-size: 30px;
+}
+
+.fa-plus-square {
+    display: none !important;
+}
+
 #budgetContainer {
-    padding: 20px 15px !important;
+    position: relative;
+    padding: 40px 15px !important;
     background: var(--base-color);
+    transition: 2s !important;
 }
 
 #budgetContainer>h1 {
@@ -118,6 +133,8 @@ i:hover {
 
 #submitActivityContainer {
     background: var(--base-color);
+    position: relative;
+    padding: 30px 20px !important;
 }
 
 #submitActivityContainer>h1 {
@@ -135,6 +152,8 @@ i:hover {
 
 #ActivityContainer {
     background: var(--base-color);
+    position: relative;
+    padding: 30px 15px !important;
 }
 
 #ActivityContainer>h1 {
@@ -149,6 +168,13 @@ i:hover {
     margin: 20px 0px 30px 0;
     font-size: 30px;
 }
+
+
+
+
+
+
+
 
 @media only screen and (min-width: 1200px) {
     .container-fluid {

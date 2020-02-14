@@ -6,6 +6,9 @@ var budget = document.getElementById('addBudget');
 var budgetContainer = document.getElementById('budgetContainer');
 var expensesTotal = document.getElementById('expensesTotal');
 var leftOver = document.getElementById('budgetDifference');
+var minimizeToggle = document.getElementById('minimizeToggle1');
+var minimizeToggle2 = document.getElementById('minimizeToggle2');
+
 
 
 //Set Budget event
@@ -20,6 +23,9 @@ itemList.addEventListener('click', changeStatus)
 itemList.addEventListener('click', changeOrder)
 // Filter Event
 filter.addEventListener('click', filterItems);
+// minimize maximize Event
+minimizeToggle.addEventListener('click', minimizeToggleItems);
+minimizeToggle2.addEventListener('click', minimizeToggleItems);
 
 // Set Budget
 function setBudget(e) {
@@ -38,7 +44,6 @@ function setBudget(e) {
     document.getElementById('budgetDifference').style.display = 'inline-block';
     calculateExpenses();
 }
-
 
 // Set total expenses
 var expensesTotalAmount;
@@ -248,6 +253,15 @@ function isBefore(el1, el2) {
   return false;
 }
 
+function minimizeToggleItems(e){
+    console.log(e.target)
+    console.log(e.target.parentNode)
+    e.target.parentNode.style.height = '20px';
+    //e.target.parentNode.style.display = 'block';
+
+    
+    
+}
 
 
 
