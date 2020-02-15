@@ -275,7 +275,7 @@ function minimizeToggleItems(e){
     leftOver.style.display = 'none';
     expensesTotal.style.display = 'none';
     leftOver.style.display = 'none';
-    }, 300)
+    }, 100)
     b++
 } else if (b == 1) {
     var button = document.querySelector('.fa-plus-square');
@@ -287,7 +287,7 @@ function minimizeToggleItems(e){
         leftOver.style.display = 'inline-block';
         expensesTotal.style.display = 'inline-block';
         leftOver.style.display = 'inline-block';
-    }, 300)
+    }, 100)
     b--
     }
     //e.target.parentNode.style.display = 'block';
