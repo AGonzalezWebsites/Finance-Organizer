@@ -55,6 +55,7 @@ i:hover {
 .fa-minus-square, .fa-plus-square {
     display: inline;
     position: absolute;
+    opacity: .7;
     color: rgb(177, 177, 177);
     font-size: 0px;
     top: 0;
@@ -90,6 +91,7 @@ i:hover {
     font-family: var(--header-font);
     font-size: 15px;
     z-index: 1;
+    transition: .2s ease-in;
 }
 
 #expenseBar {
@@ -115,6 +117,7 @@ i:hover {
     font-family: var(--header-font);
     font-size: 15px;
     z-index: 1;
+    transition: .2s ease-in;
 }
 
 #budgetBar {

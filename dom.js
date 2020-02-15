@@ -234,7 +234,6 @@ function filterItems(e){
 }
 
 // Arrange Items
-
 var _el;
 function dragOver(e) {
     console.log('dragOver Beg '+e.target);
@@ -260,37 +259,27 @@ function isBefore(el1, el2) {
   return false;
 }
 var b = 0
+var button = document.querySelector('.fa-minus-square');
+var buttonMax = document.querySelector('.fa-plus-square');
 function minimizeToggleItems(e){
-    
     if (b == 0) {
     console.log(e.target)
     console.log(e.target.parentNode)
-    var button = document.querySelector('.fa-minus-square');
-    var buttonMax = document.querySelector('.fa-plus-square');
-    
-    e.target.parentNode.style.height = '130px';
-    setTimeout(function(){
+    console.log(leftOver.children[0]);
+    e.target.parentNode.style.height = '150px';
     button.style.fontSize = '0px';
     buttonMax.style.fontSize = '25px';
-    leftOver.style.display = 'none';
-    expensesTotal.style.display = 'none';
-    leftOver.style.display = 'none';
-    }, 100)
+    leftOver.children[0].style.fontSize = '0px';
+    expensesTotal.children[0].style.fontSize = '0px';
     b++
 } else if (b == 1) {
-    var button = document.querySelector('.fa-plus-square');
-    var buttonMax = document.querySelector('.fa-minus-square');
     e.target.parentNode.style.height = '300px';
-    setTimeout(function(){
-        button.style.fontSize = '0px';
-        buttonMax.style.fontSize = '25px';
-        leftOver.style.display = 'inline-block';
-        expensesTotal.style.display = 'inline-block';
-        leftOver.style.display = 'inline-block';
-    }, 100)
+    button.style.fontSize = '0px';
+    buttonMax.style.fontSize = '25px';
+    leftOver.children[0].style.fontSize = '15px';
+    expensesTotal.children[0].style.fontSize = '15px';
     b--
     }
-    //e.target.parentNode.style.display = 'block';
 }
 
 
