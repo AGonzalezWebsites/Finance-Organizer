@@ -12,27 +12,26 @@
   <title>Finance Helper$</title>
 </head>
 <body>
-
   <header id="main-header" class=" text-white p-3 pt-4 mb-3 border-bottom" style="border-bottom:2px solid rgb(49, 49, 49);">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-            <h1 id="header-title" class="text-center">Finance Helper$</h1>
+          <h1 id="header-title" class="text-center">Finance Helper$</h1>
         </div>
         
       </div>
     </div>
   </header>
-
+  
   <div class="container-fluid">
-   <div id="main">
-
-    <div class="d-flex flex-column justify-content-center border border-dark rounded p-2 pt-3 pl-3 mb-3" id="budgetContainer">
+    <div id="main">
       
-      <i class="far fa-minus-square" id="minimizeToggle1A"></i>
-      <i class="far fa-plus-square" id="minimizeToggle1B"></i>
+      <div class="d-flex flex-column justify-content-center border border-dark rounded p-2 pt-3 pl-3 mb-3" id="budgetContainer">
+        
+        <i class="far fa-minus-square" id="minimizeToggle1A"></i>
+        <i class="far fa-plus-square" id="minimizeToggle1B"></i>
 
-      <div class="badge badge-light text-wrap order-2" id="expensesTotal" style="display: none;">
+        <div class="badge badge-light text-wrap order-2" id="expensesTotal" style="display: none;">
         <h1 class="badge badge-light text-wrap mb-0"></h1>
         <div id="expenseBar"></div>
       </div>
@@ -45,15 +44,15 @@
         <input type="text" maxlength="9" class="form-control mr-2 mt-2 w-30 p-2" id="budget" value="" placeholder="Budget Amount?">
         <input type="submit" class="btn btn-success mt-2 border" id="submitBudget" value="Set Budget">
       </form>
-      </div>
-
+    </div>
+    
      <div class="border border-dark rounded p-3 mb-3" id="submitActivityContainer" style="display: none;">
       <i class="far fa-minus-square" id="minimizeToggle2"></i>
       <i class="far fa-plus-square" id="minimizeToggle2"></i>
       <!-- <h1 class="title text-light pr-2 text-center">Submit Expense</h1> -->
       <form id="addForm" class="d-flex justify-content-center form-inline mb-3">
-          <input type="text" maxlength="30" class="form-control mr-2 mt-2 w-60 p-2" id="item" value="" placeholder="Payment For?">
-          <input type="text" maxlength="9" class="form-control mr-2 mt-2 w-30 p-2" id="amount" value="" placeholder="Amount?">
+        <input type="text" maxlength="30" class="form-control mr-2 mt-2 w-60 p-2" id="item" value="" placeholder="Payment For?">
+        <input type="text" maxlength="9" class="form-control mr-2 mt-2 w-30 p-2" id="amount" value="" placeholder="Amount?">
         <select class="form-control mr-2 mt-2" style="width:105px;" id="priority">
           <option value="1">Paid</option>
           <option value="2">Pending</option>
@@ -61,10 +60,10 @@
         </select>
         <input type="submit" class="btn btn-success mt-2 border" value="Submit">
       </form>
-      </div>
-
-      <div class="border border-dark rounded p-3 mb-3" id="ActivityContainer" style="display: none;">
-        <!-- <i class="far fa-minus-square" id="minimizeToggle3"></i>
+    </div>
+    
+    <div class="border border-dark rounded p-3 mb-3" id="ActivityContainer" style="display: none;">
+      <!-- <i class="far fa-minus-square" id="minimizeToggle3"></i>
         <i class="far fa-plus-square" id="minimizeToggle3"></i> -->
         <h1 class="title text-light text-center">Expenses</h1>
         <select class="d-flex justify-content-center form-control mr-2 mb-2 mt-2" id="filter">
@@ -78,9 +77,17 @@
         </ul>
         <div id="output"></div>
       </div>
-   </div>
+    </div>
   </div>
-
+  
+  
+  <div class="helpContainer bg-warning" onclick="helpToggle();">
+    <i class="fas fa-question"></i>
+  </div>
+  <div class="financialContainer bg-success" onclick="financeToggle();">
+    <i class="fas fa-dollar-sign"></i>
+  </div>
+  
   <script src="dom.js"></script>
 </body>
 </html>

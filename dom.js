@@ -319,8 +319,40 @@ function loadPreviousSession(){
         document.querySelector('.fa-minus-square').style.fontSize = '25px';
         calculateExpenses();
 
+}
 
+function helpToggle() {
+    var helpContainer = document.querySelector('.helpContainer');
+    if (helpContainer.style.width == '400px') {
+        helpContainer.style.width = '50px';
+        helpContainer.style.height = '50px';
+        helpContainer.style.top = '145px';
+        helpContainer.style.zIndex = '1';
+        helpContainer.classList.add("bg-warning");
+    } else {
+        helpContainer.style.width = '400px';
+        helpContainer.style.height = '100%';
+        helpContainer.style.top = '0px';
+        helpContainer.style.zIndex = '2';
+        helpContainer.classList.remove("bg-warning");
+    }
+}
 
+function financeToggle() {
+    var helpContainer = document.querySelector('.financialContainer');
+    if (helpContainer.style.width == '400px') {
+        helpContainer.style.width = '50px';
+        helpContainer.style.height = '50px';
+        helpContainer.style.top = '185px';
+        helpContainer.style.zIndex = '1';
+        helpContainer.classList.add("bg-success");
+    } else {
+        helpContainer.style.width = '400px';
+        helpContainer.style.height = '100%';
+        helpContainer.style.top = '0px';
+        helpContainer.style.zIndex = '2';
+        helpContainer.classList.remove("bg-success");
+    }
 }
 
 
