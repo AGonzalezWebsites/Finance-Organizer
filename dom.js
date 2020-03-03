@@ -324,34 +324,39 @@ function loadPreviousSession(){
 function helpToggle() {
     var helpContainer = document.querySelector('.helpContainer');
     if (helpContainer.style.width == '400px') {
-        helpContainer.style.width = '50px';
+        helpContainer.style.width = '25px';
         helpContainer.style.height = '50px';
         helpContainer.style.top = '145px';
         helpContainer.style.zIndex = '1';
         helpContainer.classList.add("bg-warning");
+        helpContainer.style.overflow = 'hidden';
+        document.getElementById('helpContent').style.display = 'none';
     } else {
         helpContainer.style.width = '400px';
         helpContainer.style.height = '100%';
         helpContainer.style.top = '0px';
         helpContainer.style.zIndex = '2';
         helpContainer.classList.remove("bg-warning");
+        setTimeout(function(){helpContainer.style.overflow = 'scroll'; document.getElementById('helpContent').style.display = 'flex';}, 200);
     }
 }
 
 function financeToggle() {
     var helpContainer = document.querySelector('.financialContainer');
     if (helpContainer.style.width == '400px') {
-        helpContainer.style.width = '50px';
+        helpContainer.style.width = '25px';
         helpContainer.style.height = '50px';
         helpContainer.style.top = '185px';
         helpContainer.style.zIndex = '1';
         helpContainer.classList.add("bg-success");
+        helpContainer.style.overflow = 'hidden';
     } else {
         helpContainer.style.width = '400px';
         helpContainer.style.height = '100%';
         helpContainer.style.top = '0px';
         helpContainer.style.zIndex = '2';
         helpContainer.classList.remove("bg-success");
+        setTimeout(function(){helpContainer.style.overflow = 'scroll';}, 200);
     }
 }
 

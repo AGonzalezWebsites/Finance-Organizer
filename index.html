@@ -82,10 +82,49 @@
   
   
   <div class="helpContainer bg-warning" onclick="helpToggle();">
-    <i class="fas fa-question"></i>
+    <div class="d-flex">
+      <i class="fas fa-question"></i>
+      <h2><span class="badge badge-dark">App Help</span></h2>
+    </div>
+
+    <div class="flex-column justify-content-center" id="helpContent" style="display: flex; width: 80%; margin-left: auto; margin-right: auto;">
+
+      <div class="card d-flex" style="margin: 10px 0 20px 0;">
+        <img class="card-img-top" src="img/budget.JPG" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Set Budget</h5>
+          <p class="card-text">To get started, simply input the <strong>total</strong> budget. Have no fear, this can be adjusted at any point!</p>
+        </div>
+      </div>
+    
+
+
+      <div class="card p-2" style="margin: 10px 0 20px 0;">
+        <img class="card-img-top" src="img/progressBar.JPG" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Budget vs Expenses</h5>
+          <p class="card-text">Here you'll find dynamic progression bars to compare your budget vs expense amounts. <br><strong>Note:</strong> This box can be minimized to save visual space</p>
+        </div>
+      </div>
+
+
+      <div class="card p-2" style="margin: 10px 0 20px 0;">
+        <img class="card-img-top" src="img/newExpense.JPG" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Set Budget</h5>
+          <p class="card-text">To get started, simply input the <strong>total</strong> budget. Have no fear, this can be adjusted at any point!</p>
+        </div>
+      </div>
+
+    </div>
+
   </div>
+
   <div class="financialContainer bg-success" onclick="financeToggle();">
-    <i class="fas fa-dollar-sign"></i>
+    <div class="d-flex">
+      <i class="fas fa-dollar-sign"></i>
+      <h2><span class="badge badge-dark">Financial Guidance</span></h2>
+    </div>
   </div>
   
   <script src="dom.js"></script>
