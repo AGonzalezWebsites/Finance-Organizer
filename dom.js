@@ -49,7 +49,6 @@ function setBudget(e) {
     budgetElement.className = 'order-1 badge badge-light text-wrap';
     budgetElement.innerHTML = 'Budget:<br>$'+budgetAmount;
     budgetElement.setAttribute('id', 'budgetTotal')
-    budgetContainer.style.height = '300px';
     budgetContainer.appendChild(budgetElement)
     submitBudget.style.display = "none";
     document.getElementById('budget').style.display = 'none';
@@ -328,14 +327,14 @@ function minimizeToggleItems(e){
     console.log(e.target.parentNode)
     console.log(leftOver.children[0]);
     document.querySelector('.budgetButtonContainer').style.display = 'none'
-    e.target.parentNode.style.height = '150px';
+    e.target.parentNode.style.height = 'auto';
     button.style.fontSize = '0px';
     buttonMax.style.fontSize = '25px';
     leftOver.children[0].style.fontSize = '0px';
     expensesTotal.children[0].style.fontSize = '0px';
     b++
 } else if (b == 1) {
-    e.target.parentNode.style.height = '300px';
+    e.target.parentNode.style.height = 'auto';
     button.style.fontSize = '0px';
     buttonMax.style.fontSize = '25px';
     leftOver.children[0].style.fontSize = '15px';
@@ -371,7 +370,6 @@ function loadPreviousSession(){
         budgetElement.className = 'order-1 badge badge-light text-wrap';
         budgetElement.innerHTML = 'Budget:<br>$'+budgetAmount;
         budgetElement.setAttribute('id', 'budgetTotal')
-        budgetContainer.style.height = '300px';
         budgetContainer.appendChild(budgetElement)
         submitBudget.style.display = "none";
         document.getElementById('budget').style.display = 'none';
@@ -461,7 +459,7 @@ function loadPreviousExpense(){
 
 function helpToggle() {
     var helpContainer = document.querySelector('.helpContainer');
-    if (helpContainer.style.width == '400px') {
+    if (helpContainer.style.width == '350px') {
         helpContainer.style.width = '25px';
         helpContainer.style.height = '50px';
         helpContainer.style.top = '145px';
@@ -472,7 +470,7 @@ function helpToggle() {
         helpContainer.style.overflow = 'hidden';
         document.getElementById('helpContent').style.display = 'none';
     } else {
-        helpContainer.style.width = '400px';
+        helpContainer.style.width = '350px';
         helpContainer.style.height = '100%';
         helpContainer.style.top = '0px';
         helpContainer.style.zIndex = '2';
@@ -485,7 +483,7 @@ function helpToggle() {
 
 function financeToggle() {
     var helpContainer = document.querySelector('.financialContainer');
-    if (helpContainer.style.width == '400px') {
+    if (helpContainer.style.width == '350px') {
         helpContainer.style.width = '25px';
         helpContainer.style.height = '50px';
         helpContainer.style.top = '185px';
@@ -496,7 +494,7 @@ function financeToggle() {
         helpContainer.style.overflow = 'hidden';
         document.getElementById('financeContent').style.display = 'none';
     } else {
-        helpContainer.style.width = '400px';
+        helpContainer.style.width = '350px';
         helpContainer.style.height = '100%';
         helpContainer.style.top = '0px';
         helpContainer.style.zIndex = '2';

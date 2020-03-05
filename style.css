@@ -1,10 +1,17 @@
 /* Fonts we can use 
-font-family: 'Playfair Display', serif;
 font-family: 'Raleway', sans-serif;
+font-family: 'Playfair Display', serif;
+font-family: 'Rock Salt', cursive;
+font-family: 'Trade Winds', cursive;
+font-family: 'Dancing Script', cursive;
+font-family: 'Shadows Into Light', cursive;
+font-family: 'Great Vibes', cursive;
+font-family: 'Sacramento', cursive;
 */
 html {
-    --banner-font: 'Playfair Display', serif;
-    --header-font: 'Raleway', sans-serif;
+    --banner-font: 'Shadows Into Light', cursive;
+    --header-font: 'Shadows Into Light', cursive;
+    --budget-font: 'Dancing Script', cursive;
     /* --base-color: rgba(68, 56, 59, 0.486); */
     --base-color: rgba(47, 89, 109, 0.596);
     --sub-color: rgba(221, 217, 156, 0.925);
@@ -70,6 +77,7 @@ i:hover {
 
 #budgetContainer {
     position: relative;
+    height: auto;
     padding: 40px 15px !important;
     background: var(--base-color);
     transition: height .4s !important;
@@ -86,7 +94,7 @@ i:hover {
 }
 
 #budgetContainer>h1 {
-    font-family: var(--header-font);
+    font-family: var(--budget-font);
     font-size: 15px;
     margin: 5px 0px;
     padding: 10px 20px;
@@ -112,7 +120,7 @@ i:hover {
 }
 
 #expensesTotal>h1 {
-    font-family: var(--header-font);
+    font-family: var(--budget-font);
     font-size: 15px;
     z-index: 1;
     transition: .2s ease-in;
@@ -138,7 +146,7 @@ i:hover {
 }
 
 #budgetDifference>h1 {
-    font-family: var(--header-font);
+    font-family: var(--budget-font);
     font-size: 15px;
     z-index: 1;
     transition: .2s ease-in;
@@ -273,5 +281,12 @@ i:hover {
 @media only screen and (max-width: 575px) {
     #budget {
       margin: 20px 60px 10px 70px !important;
+    }
+  }
+
+@media only screen and (max-width: 450px) {
+    #budget {
+        width: 150px;
+      margin: 20px 10px 10px 10px !important;
     }
   }
