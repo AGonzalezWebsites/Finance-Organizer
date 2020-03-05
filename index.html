@@ -31,6 +31,11 @@
         <i class="far fa-minus-square" id="minimizeToggle1A"></i>
         <i class="far fa-plus-square" id="minimizeToggle1B"></i>
 
+        <div class="budgetButtonContainer" style="display: none;">
+          <button type="button" class="btn btn-warning" id="changeBudget" style="width: 150px;">Change Budget</button>
+          <button type="button" class="btn btn-danger" id="changeBudget" style="width: 150px;">New Session</button>
+        </div>
+
         <div class="badge badge-light text-wrap order-2" id="expensesTotal" style="display: none;">
         <h1 class="badge badge-light text-wrap mb-0"></h1>
         <div id="expenseBar"></div>
@@ -40,7 +45,7 @@
         <h1 class="badge badge-light text-wrap mb-0"></h1>
         <div id="budgetBar"></div>
       </div>
-      <form id="addBudget" class="justify-content-center form-inline mb-3">
+      <form id="addBudget" class="d-flex justify-content-center form-inline">
         <input type="text" maxlength="9" class="form-control mr-2 mt-2 w-30 p-2" id="budget" value="" placeholder="Budget Amount?">
         <input type="submit" class="btn btn-success mt-2 border" id="submitBudget" value="Set Budget">
       </form>
@@ -50,7 +55,7 @@
       <i class="far fa-minus-square" id="minimizeToggle2"></i>
       <i class="far fa-plus-square" id="minimizeToggle2"></i>
       <!-- <h1 class="title text-light pr-2 text-center">Submit Expense</h1> -->
-      <form id="addForm" class="d-flex justify-content-center form-inline mb-3">
+      <form id="addForm" class="d-flex justify-content-center form-inline">
         <input type="text" maxlength="30" class="form-control mr-2 mt-2 w-60 p-2" id="item" value="" placeholder="Payment For?">
         <input type="text" maxlength="9" class="form-control mr-2 mt-2 w-30 p-2" id="amount" value="" placeholder="Amount?">
         <select class="form-control mr-2 mt-2" style="width:105px;" id="priority">

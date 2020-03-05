@@ -74,6 +74,7 @@ i:hover {
     background: var(--base-color);
     transition: height .4s !important;
     transition-timing-function: ease;
+    overflow: hidden;
 }
 
 #budgetContainer i {
@@ -91,6 +92,15 @@ i:hover {
     padding: 10px 20px;
     border: 1px inset silver;
     box-shadow: rgba(49, 49, 49, 0.445) 0px 2px 10px 5px;
+}
+
+.budgetButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.budgetButtonContainer button {
+    margin: 5px;
 }
 
 #expensesTotal {

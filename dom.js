@@ -1,7 +1,8 @@
 //To do List:
 //Add date to List
+//Click to change budget
 //Local Storage functionality - started at bottom of page
-// Delete All Button for list items
+//Delete All Button for list items
 
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
@@ -9,6 +10,7 @@ var priority = document.getElementById('priority');
 var filter = document.getElementById('filter');
 var budget = document.getElementById('addBudget');
 var budgetContainer = document.getElementById('budgetContainer');
+var changeBudgetTrigger = document.getElementById('changeBudget');
 var expensesTotal = document.getElementById('expensesTotal');
 var leftOver = document.getElementById('budgetDifference');
 var minimizeToggle = document.getElementById('minimizeToggle1A');
@@ -18,6 +20,8 @@ var minimizeToggle2 = document.getElementById('minimizeToggle1B');
 
 //Set Budget event
 submitBudget.addEventListener('click', setBudget)
+//Change Budget event
+changeBudgetTrigger.addEventListener('click', changeBudget)
 // Form Submit Event
 form.addEventListener('submit', addItem);
 // Delete event
@@ -46,12 +50,22 @@ function setBudget(e) {
     budgetContainer.style.height = '300px';
     budgetContainer.appendChild(budgetElement)
     submitBudget.style.display = "none";
+    document.getElementById('budget').style.display = 'none';
     document.getElementById('addBudget').style.display = 'none';
     expensesTotal.style.display = 'inline-block';
+    document.querySelector('.budgetButtonContainer').style.display = 'flex';
     document.getElementById('submitActivityContainer').style.display = 'block';
     document.getElementById('budgetDifference').style.display = 'inline-block';
     document.querySelector('.fa-minus-square').style.fontSize = '25px';
     calculateExpenses();
+}
+
+// Change Budget
+function changeBudget(e){
+    budgetElement.style.display = 'none';
+    submitBudget.style.display = "block";
+    document.getElementById('budget').style.display = 'block';
+    document.getElementById('addBudget').style.display = 'block';
 }
 
 // Set total expenses
@@ -267,6 +281,7 @@ function minimizeToggleItems(e){
     console.log(e.target)
     console.log(e.target.parentNode)
     console.log(leftOver.children[0]);
+    document.querySelector('.budgetButtonContainer').style.display = 'none'
     e.target.parentNode.style.height = '150px';
     button.style.fontSize = '0px';
     buttonMax.style.fontSize = '25px';
@@ -279,6 +294,7 @@ function minimizeToggleItems(e){
     buttonMax.style.fontSize = '25px';
     leftOver.children[0].style.fontSize = '15px';
     expensesTotal.children[0].style.fontSize = '15px';
+    document.querySelector('.budgetButtonContainer').style.display = 'flex'
     b--
     }
 }
@@ -293,7 +309,7 @@ function minimizeToggleItems(e){
 
     if (localStorage.getItem('budget') > -1) {
         console.log('there was data here');
-        loadPreviousSession();
+        //loadPreviousSession();
     } else {
         
     }
