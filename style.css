@@ -96,11 +96,12 @@ i:hover {
 
 .budgetButtonContainer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-bottom: 2px;
 }
 
 .budgetButtonContainer button {
-    margin: 5px;
+    margin-left: 5px;
 }
 
 #expensesTotal {

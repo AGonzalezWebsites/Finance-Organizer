@@ -11,13 +11,15 @@ var filter = document.getElementById('filter');
 var budget = document.getElementById('addBudget');
 var budgetContainer = document.getElementById('budgetContainer');
 var changeBudgetTrigger = document.getElementById('changeBudget');
+var newSessionTrigger = document.getElementById('newSession');
 var expensesTotal = document.getElementById('expensesTotal');
 var leftOver = document.getElementById('budgetDifference');
 var minimizeToggle = document.getElementById('minimizeToggle1A');
 var minimizeToggle2 = document.getElementById('minimizeToggle1B');
 
 
-
+//Clear Local Storage
+newSessionTrigger.addEventListener('click', newSession)
 //Set Budget event
 submitBudget.addEventListener('click', setBudget)
 //Change Budget event
@@ -66,6 +68,16 @@ function changeBudget(e){
     submitBudget.style.display = "block";
     document.getElementById('budget').style.display = 'block';
     document.getElementById('addBudget').style.display = 'block';
+    document.getElementById('addBudget').classList.remove('justify-content-center')
+    document.getElementById('addBudget').classList.add('justify-content-end')
+}
+
+function newSession(e){
+
+    if(confirm('Are you sure?')){
+        localStorage.clear();
+        location.reload();
+    }
 }
 
 // Set total expenses
@@ -122,19 +134,24 @@ function leftOverPercentage () {
 
 }
 
-
+// Used for local storage in this function
+if (localStorage.expensesAddedAmount > 0 && localStorage.expensesAddedAmount != 0){
+    var itemAddedAmount = localStorage.expensesAddedAmount;
+} else {
+    var itemAddedAmount = 0;
+}
 // Add item
 function addItem(e){
     e.preventDefault();
 
-    // Get input value
+    // Get input name
     var newPayment = document.getElementById('item').value;
 
     // Create li for new item
     var li = document.createElement('li');
     // Add Class
     li.className = 'list-group-item';
-
+    
     // assign background color based off priority level selected
     prioritySelected = priority[priority.value - 1].innerHTML;
     if(priority.value - 1 === 0){
@@ -144,7 +161,7 @@ function addItem(e){
     } else {
         selectedBtnColor = 'btn-danger';
     }
-    priorityButton = '<span type=\"button\" class=\"badge text-wrap p-2 mr-2 float-left status ' +selectedBtnColor+ '\">'+prioritySelected+'</span> '+newPayment;
+    priorityButton = '<span type=\"button\" class=\"badge text-wrap p-2 mr-2 float-left status ' +selectedBtnColor+ '\">'+prioritySelected+'</span>'+newPayment;
     // Add priority + text node with input value
     li.innerHTML = li.innerHTML+priorityButton;
     
@@ -154,7 +171,7 @@ function addItem(e){
     deleteBtn.className = 'far fa-trash-alt btn btn-danger btn-sm float-right delete';
     //Append button to li
     li.appendChild(deleteBtn);
-
+    
     //get Amount value
     var newAmount = document.getElementById('amount').value;
     newAmount = newAmount.replace(/,/g, "").replace(/\$/g, '');
@@ -178,6 +195,14 @@ function addItem(e){
     document.getElementById('amount').value = "";
     //Append li to list
     itemList.appendChild(li);
+    
+    //Array setup for local Storage
+    var expensesArray = [newPayment, newAmount, selectedBtnColor, prioritySelected];
+    //Local Storage Setup for expenses
+    localStorage.setItem('localExpenses'+[itemAddedAmount], JSON.stringify(expensesArray));
+    itemAddedAmount++
+    localStorage.setItem('expensesAddedAmount', itemAddedAmount);
+
     //delete inner contents of activity adder
     document.getElementById('item').value = "";
     document.getElementById('item').placeholder = "Next payment For?";
@@ -206,16 +231,37 @@ function changeStatus(e){
 
     }
 }
+
 // remove item
 function removeItem(e){
     if (e.target.classList.contains('delete')){
+        var targetToString = ["Hi", e.target.previousSibling.textContent];
+        
+        console.log(e.target.previousSibling.textContent)
+
+
+
         if(confirm('Are you sure?')){
             var li = e.target.parentElement;
             itemList.removeChild(li);
-        }
 
+            itemAddedAmount--
+            for(var i=0; localStorage.expensesAddedAmount > i; i++) {
+                grabbedItem =  JSON. parse(localStorage.getItem('localExpenses'+i));
+    
+                if (grabbedItem[0] == e.target.previousSibling.textContent) {
+                    console.log(e.target.previousSibling.textContent+" Matched "+grabbedItem[0])
+                    console.log(grabbedItem);
+                    localStorage.removeItem(grabbedItem);
+                } else {
+                    console.log(e.target.previousSibling.textContent+" Did not Match "+grabbedItem[0])
+                }
+            } 
+            localStorage.expensesAddedAmount--
+        }        
+        calculateExpenses()
     }
-    calculateExpenses();
+
 }
 
 // change list order
@@ -309,7 +355,7 @@ function minimizeToggleItems(e){
 
     if (localStorage.getItem('budget') > -1) {
         console.log('there was data here');
-        //loadPreviousSession();
+        loadPreviousSession();
     } else {
         
     }
@@ -321,7 +367,6 @@ function loadPreviousSession(){
         console.log('there was data here');
         budgetAmount = localStorage.getItem('budget');
         budgetAmount = budgetAmount.replace(/,/g, "").replace(/\$/g, '');
-        localStorage.setItem('budget', budgetAmount);
         budgetElement = document.createElement('h1')
         budgetElement.className = 'order-1 badge badge-light text-wrap';
         budgetElement.innerHTML = 'Budget:<br>$'+budgetAmount;
@@ -329,14 +374,90 @@ function loadPreviousSession(){
         budgetContainer.style.height = '300px';
         budgetContainer.appendChild(budgetElement)
         submitBudget.style.display = "none";
+        document.getElementById('budget').style.display = 'none';
         document.getElementById('addBudget').style.display = 'none';
         expensesTotal.style.display = 'inline-block';
+        document.querySelector('.budgetButtonContainer').style.display = 'flex';
         document.getElementById('submitActivityContainer').style.display = 'block';
         document.getElementById('budgetDifference').style.display = 'inline-block';
         document.querySelector('.fa-minus-square').style.fontSize = '25px';
-        calculateExpenses();
-
+        loadPreviousExpense();
 }
+
+
+
+function loadPreviousExpense(){
+    if (localStorage.length > 1) {
+        console.log('localStorage was greater than 1')
+        for(var i=0; localStorage.expensesAddedAmount > i; i++) {
+            grabbedItem =  JSON. parse(localStorage.getItem('localExpenses'+i));
+            console.log(grabbedItem);
+
+            // Get input name
+            var newPayment = grabbedItem[0];
+
+            // Create li for new item
+            var li = document.createElement('li');
+            // Add Class
+            li.className = 'list-group-item';
+            
+            // assign background color based off priority level selected
+            prioritySelected = grabbedItem[3];
+            priorityButton = '<span type=\"button\" class=\"badge text-wrap p-2 mr-2 float-left status ' +grabbedItem[2]+ '\">'+prioritySelected+'</span>'+newPayment;
+            // Add priority + text node with input value
+            li.innerHTML = li.innerHTML+priorityButton;
+            
+            //create del button element
+            var deleteBtn = document.createElement('i');
+            // Add classes to delete button
+            deleteBtn.className = 'far fa-trash-alt btn btn-danger btn-sm float-right delete';
+            //Append button to li
+            li.appendChild(deleteBtn);
+            
+            //get Amount value
+            var newAmount = grabbedItem[1];
+            newAmount = newAmount.replace(/,/g, "").replace(/\$/g, '');
+            // create div to be inserted
+            newAmountInsert = document.createElement('div');
+            //add amount value to div
+            newAmountInsert.innerHTML = '$'+newAmount;
+            // Add class to amount item
+            newAmountInsert.className = 'badge text-wrap p-2 mr-2 float-left';
+            // Add ID to amount item
+            newAmountInsert.setAttribute("id", "itemAmount");
+            //Append amount to li
+            li.appendChild(newAmountInsert);
+            //add amount value to li
+            li.value = newAmount;
+            li.style.border = '1px inset silver';
+            li.draggable = "true";
+            li.ondragover = "dragOver(event)";
+            li.ondragstart = "dragStart(event)";
+
+            document.getElementById('amount').value = "";
+            //Append li to list
+            itemList.appendChild(li);
+            
+
+            //delete inner contents of activity adder
+            document.getElementById('item').value = "";
+            document.getElementById('item').placeholder = "Next payment For?";
+
+            // Display Block for container - meant for first input
+            document.getElementById('ActivityContainer').style.display = 'block';
+            calculateExpenses();
+        }
+    } else {
+        console.log('localStorage was NOT greater than 1')
+        calculateExpenses();
+    }
+}
+
+
+
+
+
+//END Local Storage
 
 function helpToggle() {
     var helpContainer = document.querySelector('.helpContainer');
@@ -346,6 +467,8 @@ function helpToggle() {
         helpContainer.style.top = '145px';
         helpContainer.style.zIndex = '1';
         helpContainer.classList.add("bg-warning");
+        document.getElementById('main').style.filter = 'blur(0px)';
+        document.getElementById('main-header').style.filter = 'blur(0px)';
         helpContainer.style.overflow = 'hidden';
         document.getElementById('helpContent').style.display = 'none';
     } else {
@@ -354,6 +477,8 @@ function helpToggle() {
         helpContainer.style.top = '0px';
         helpContainer.style.zIndex = '2';
         helpContainer.classList.remove("bg-warning");
+        document.getElementById('main').style.filter = 'blur(2px)';
+        document.getElementById('main-header').style.filter = 'blur(2px)';
         setTimeout(function(){helpContainer.style.overflow = 'scroll'; document.getElementById('helpContent').style.display = 'flex';}, 200);
     }
 }
@@ -365,6 +490,8 @@ function financeToggle() {
         helpContainer.style.height = '50px';
         helpContainer.style.top = '185px';
         helpContainer.style.zIndex = '1';
+        document.getElementById('main').style.filter = 'blur(0px)';
+        document.getElementById('main-header').style.filter = 'blur(0px)';
         helpContainer.classList.add("bg-success");
         helpContainer.style.overflow = 'hidden';
         document.getElementById('financeContent').style.display = 'none';
@@ -373,6 +500,8 @@ function financeToggle() {
         helpContainer.style.height = '100%';
         helpContainer.style.top = '0px';
         helpContainer.style.zIndex = '2';
+        document.getElementById('main').style.filter = 'blur(2px)';
+        document.getElementById('main-header').style.filter = 'blur(2px)';
         helpContainer.classList.remove("bg-success");
         setTimeout(function(){helpContainer.style.overflow = 'scroll'; document.getElementById('financeContent').style.display = 'flex';}, 200);
     }

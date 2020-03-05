@@ -12,7 +12,7 @@
   <title>Finance Helper$</title>
 </head>
 <body>
-  <header id="main-header" class=" text-white p-3 pt-4 mb-3 border-bottom" style="border-bottom:2px solid rgb(49, 49, 49);">
+  <header id="main-header" class=" text-white p-3 pt-4 mb-3 border-bottom" style="border-bottom:2px solid rgb(49, 49, 49); transition: 1s;">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -24,7 +24,7 @@
   </header>
   
   <div class="container-fluid">
-    <div id="main">
+    <div id="main" style="transition: 1s;">
       
       <div class="d-flex flex-column justify-content-center border border-dark rounded p-2 pt-3 pl-3 mb-3" id="budgetContainer">
         
@@ -33,7 +33,7 @@
 
         <div class="budgetButtonContainer" style="display: none;">
           <button type="button" class="btn btn-warning" id="changeBudget" style="width: 150px;">Change Budget</button>
-          <button type="button" class="btn btn-danger" id="changeBudget" style="width: 150px;">New Session</button>
+          <button type="button" class="btn btn-danger" id="newSession" style="width: 150px;">New Session</button>
         </div>
 
         <div class="badge badge-light text-wrap order-2" id="expensesTotal" style="display: none;">
@@ -56,7 +56,7 @@
       <i class="far fa-plus-square" id="minimizeToggle2"></i>
       <!-- <h1 class="title text-light pr-2 text-center">Submit Expense</h1> -->
       <form id="addForm" class="d-flex justify-content-center form-inline">
-        <input type="text" maxlength="30" class="form-control mr-2 mt-2 w-60 p-2" id="item" value="" placeholder="Payment For?">
+        <input type="text" maxlength="22" class="form-control mr-2 mt-2 w-60 p-2" id="item" value="" placeholder="Payment For?">
         <input type="text" maxlength="9" class="form-control mr-2 mt-2 w-30 p-2" id="amount" value="" placeholder="Amount?">
         <select class="form-control mr-2 mt-2" style="width:105px;" id="priority">
           <option value="1">Paid</option>
@@ -99,6 +99,14 @@
         <div class="card-body">
           <h5 class="card-title">Set Budget</h5>
           <p class="card-text">To get started, simply input the <strong>total</strong> budget. Have no fear, this can be adjusted at any point!</p>
+        </div>
+      </div>
+
+      <div class="card d-flex" style="margin: 10px 0 20px 0;">
+        <img class="card-img-top" src="img/changeBudget.JPG" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Change Budget & New Session</h5>
+          <p class="card-text"><li>Click <strong>Change Budget</strong> and enter the desired value. Click submit and the document will update.</li><li>This website stores the data you input into your local device's storage. To clear this data and start from scratch, click <strong>New Session</strong></li></p>
         </div>
       </div>
     
