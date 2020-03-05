@@ -76,6 +76,14 @@ i:hover {
     transition-timing-function: ease;
 }
 
+#budgetContainer i {
+    background: white !important;
+    opacity: 1;
+    border-radius: 5px;
+    padding: 0px 1px;
+    color: black;
+}
+
 #budgetContainer>h1 {
     font-family: var(--header-font);
     font-size: 15px;

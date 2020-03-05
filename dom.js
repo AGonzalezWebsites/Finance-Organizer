@@ -1,6 +1,7 @@
 //To do List:
+//Add date to List
 //Local Storage functionality - started at bottom of page
-// Add drag and drop arrangements for list - started on line 151
+// Delete All Button for list items
 
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
@@ -292,7 +293,7 @@ function minimizeToggleItems(e){
 
     if (localStorage.getItem('budget') > -1) {
         console.log('there was data here');
-
+        loadPreviousSession();
     } else {
         
     }
@@ -350,13 +351,14 @@ function financeToggle() {
         helpContainer.style.zIndex = '1';
         helpContainer.classList.add("bg-success");
         helpContainer.style.overflow = 'hidden';
+        document.getElementById('financeContent').style.display = 'none';
     } else {
         helpContainer.style.width = '400px';
         helpContainer.style.height = '100%';
         helpContainer.style.top = '0px';
         helpContainer.style.zIndex = '2';
         helpContainer.classList.remove("bg-success");
-        setTimeout(function(){helpContainer.style.overflow = 'scroll';}, 200);
+        setTimeout(function(){helpContainer.style.overflow = 'scroll'; document.getElementById('financeContent').style.display = 'flex';}, 200);
     }
 }
 
