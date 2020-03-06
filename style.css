@@ -9,9 +9,9 @@ font-family: 'Great Vibes', cursive;
 font-family: 'Sacramento', cursive;
 */
 html {
-    --banner-font: 'Shadows Into Light', cursive;
-    --header-font: 'Shadows Into Light', cursive;
-    --budget-font: 'Dancing Script', cursive;
+    --banner-font: 'Dancing Script', cursive;
+    --header-font: 'Dancing Script', cursive;
+    --budget-font: 'Playfair Display', serif;
     /* --base-color: rgba(68, 56, 59, 0.486); */
     --base-color: rgba(47, 89, 109, 0.596);
     --sub-color: rgba(221, 217, 156, 0.925);
