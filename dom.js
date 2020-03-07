@@ -335,8 +335,8 @@ function minimizeToggleItems(e){
     b++
 } else if (b == 1) {
     e.target.parentNode.style.height = 'auto';
-    button.style.fontSize = '0px';
-    buttonMax.style.fontSize = '25px';
+    buttonMax.style.fontSize = '0px';
+    button.style.fontSize = '25px';
     leftOver.children[0].style.fontSize = '15px';
     expensesTotal.children[0].style.fontSize = '15px';
     document.querySelector('.budgetButtonContainer').style.display = 'flex'
